@@ -125,12 +125,12 @@ def main():
     global b,a
 
     while True:
-        #* Uncomment to print answer grid
-        with open("ans.txt","w") as ans:
-            ans.write(str(board[0]))
-            ans.write("\n")
-            ans.write(str(board[1]))
-            ans.write(f"\n{ref}")
+        #* Uncomment to export cheat file
+        # with open("ans.txt","w") as ans:
+        #     ans.write(str(board[0]))
+        #     ans.write("\n")
+        #     ans.write(str(board[1]))
+        #     ans.write(f"\n{ref}")
         if score==q*p-ref: #* every mine is cleared
             clear()
             printboard(q,p,False)
