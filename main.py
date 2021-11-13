@@ -1,7 +1,6 @@
 from random import randint
 from sys import stdin as r
 import os
-from typing import final
 
 #! 제출 형식 때문에 global 키워드 많이 사용함
 
