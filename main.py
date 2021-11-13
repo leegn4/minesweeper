@@ -70,7 +70,7 @@ def printboard(q,p,a=True): #* print board
         for j in range(q):
             for i in range(p):
                 if board[0][j][i]=="1": print("*",end="") #* untouched tiles,mine: True
-                elif board[0][j][i]=="0": print("~",end="") #* untouched tiles,mine: False
+                elif board[0][j][i]=="0": print("-",end="") #* untouched tiles,mine: False
                 else: print(board[0][j][i],end="") #* touched tiles
             print()
 
@@ -82,13 +82,14 @@ def opensurrounding(col,row,q,p): #* open surrounding tiles if (col,row) is a fr
     for j in range(-1,1+1): #* iterate adjacent indexes - column
         for i in range(-1,1+1): #* iterate adjacent indexes - row
             if isvalid(col+j,row+i,q,p):
-                if (board[0][col+j][row+i]=="o" or board[1][col+j][row+i]=="o"): continue #* check if visited
+                if board[2][col+j][row+i]==True: continue #* check if visited
                 elif board[1][col+j][row+i]!=0: #* focused tile is not free tile
                     score+=1
                     board[0][col+j][row+i]=board[1][col+j][row+i]
-                    board[1][col+j][row+i]="o" #* make visited=True
+                    board[2][col+j][row+i]=True #* make visited=True
                 elif board[1][col+j][row+i]==0: #* focused tile is free tile
-                    board[0][col+j][row+i]="o" #* make visited=True
+                    board[0][col+j][row+i]=board[1][col+j][row+i]
+                    board[2][col+j][row+i]=True #* make visited=True
                     score+=1
                     opensurrounding(col+j,row+i,q,p) #* recursion with the focused free tile
 
@@ -111,7 +112,7 @@ def main():
     score,ref=0,0 #* ref: number of mines,cleared+ref=grid size
 
     global board
-    board=[[["" for row in range(p)] for col in range(q)] for depth in range(2)]
+    board=[[["" for row in range(p)] for col in range(q)] for depth in range(3)]
 
     mine=createmine(q,p,m)
 
